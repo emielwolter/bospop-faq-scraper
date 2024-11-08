@@ -9,7 +9,11 @@ import io
 def scrape_bospop_faq():
     # Get the FAQ page
     url = "https://bospop.nl/faq/"
-    response = requests.get(url)
+    headers = {
+        'User-Agent': 'BospopFAQBot/1.0',
+        'From': 'e.wolter@bospop.nl'  # Optional: identify yourself to the site owner
+    }
+    response = requests.get(url, headers=headers)
     soup = BeautifulSoup(response.content, 'html.parser')
 
     # Initialize lists to store data
