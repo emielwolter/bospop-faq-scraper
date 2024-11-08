@@ -4,7 +4,11 @@ import requests
 from bs4 import BeautifulSoup
 import io
 
-
+st.set_page_config(
+        page_title="Bospop FAQ Generator",
+        page_icon=":question:",
+        layout="wide"
+    )
 
 def scrape_bospop_faq():
     # Get the FAQ page
@@ -59,11 +63,6 @@ def scrape_bospop_faq():
     return df
 
 def main():
-    st.set_page_config(
-        page_title="Bospop FAQ Generator",
-        page_icon="📊",
-        layout="wide"
-    )
     
     st.title("Bospop FAQ Generator")
     st.markdown("""
