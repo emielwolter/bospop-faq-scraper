@@ -56,26 +56,27 @@ def scrape_bospop_faq():
 
 def main():
     st.set_page_config(
-    page_title="Bospop FAQ Scraper",
-    page_icon="📊",
-    layout="wide"
-)
-    st.title("Bospop FAQ Scraper")
-    st.markdown("""
-    This tool scrapes the FAQ from the Bospop website and creates an Excel file.
+        page_title="Bospop FAQ Generator",
+        page_icon="📊",
+        layout="wide"
+    )
     
-    Simply click the button below to generate and download the FAQ Excel file.
+    st.title("Bospop FAQ Generator")
+    st.markdown("""
+    Deze tool haalt de FAQ van de Bospop website op en maakt er een Excel bestand van.
+    
+    Klik op de knop hieronder om het FAQ Excel bestand te genereren en te downloaden.
     """)
     
-    if st.button("Generate FAQ Excel File"):
+    if st.button("Genereer FAQ Excel Bestand"):
         try:
-            with st.spinner("Scraping FAQ data..."):
+            with st.spinner("FAQ data aan het ophalen..."):
                 faq_df = scrape_bospop_faq()
-                st.subheader("Preview of FAQ Data")
+                st.subheader("Voorbeeld van FAQ Data")
                 st.dataframe(faq_df)
                 
                 if len(faq_df) == 0:
-                    st.error("No FAQ data found. Please check if the website structure has changed.")
+                    st.error("Geen FAQ data gevonden. Controleer of de website structuur is gewijzigd.")
                     return
                 
                 # Generate Excel file in memory
@@ -118,18 +119,18 @@ def main():
                 
                 # Offer download button
                 st.download_button(
-                    label="Download Excel file",
+                    label="Download Excel bestand",
                     data=output.getvalue(),
                     file_name="bospop_faq.xlsx",
                     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                 )
                 
-                st.success("Excel file generated successfully!")
+                st.success("Excel bestand succesvol gegenereerd!")
                 
         except requests.exceptions.RequestException:
-            st.error("Failed to connect to the Bospop website. Please check your internet connection.")
+            st.error("Kan geen verbinding maken met de Bospop website. Controleer je internetverbinding.")
         except Exception as e:
-            st.error(f"An error occurred: {str(e)}")
+            st.error(f"Er is een fout opgetreden: {str(e)}")
 
 if __name__ == "__main__":
     main()
